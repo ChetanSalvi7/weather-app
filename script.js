@@ -48,22 +48,25 @@ function showWeatherData(data) {
     timezone.innerHTML = data.timezone;
     countryEl.innerHTML = data.lat + 'N ' + data.lon + 'E'
 
+
+
     currentWeatherItemsEl.innerHTML =
         `<div class="weather-item">
         <div>Tempature</div>
-        <div>${temp} &#176;C</div>
-    </div>
-        <div class="weather-item">
-        <div>Humidity</div>
-        <div>${humidity}%</div>
+        <div style="font-size:17px;">${(temp).toFixed(1)} &#176;C</div>
     </div>
     <div class="weather-item">
         <div>Feels Like</div>
-        <div>${feels_like} &#176;C</div>
+        <div>${(feels_like).toFixed(1)} &#176;C</div>
     </div>
     <div class="weather-item">
+        <div>Humidity</div>
+        <div>${humidity} %</div>
+    </div>
+    
+    <div class="weather-item">
         <div>Wind Speed</div>
-        <div>${wind_speed} m/s</div>
+        <div>${parseFloat(wind_speed).toFixed(1)*3.6} Km/h</div>
     </div>
     <div class="weather-item">
         <div>Sunrise</div>
@@ -81,12 +84,10 @@ function showWeatherData(data) {
             <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@4x.png" alt="weather icon" class="w-icon">
             <div class="other">
                 <div class="day">${window.moment(day.dt * 1000).format('dddd')}</div>
-                <div class="temp">Day - ${day.temp.day} &#176;C</div>
-                <div class="temp">Night - ${day.temp.night} &#176;C</div>
-                
-            </div>
-            
-            `
+                <div class="temp">Max - ${day.temp.max} &#176;C</div>
+                <div class="temp">Min - ${day.temp.min} &#176;C</div>
+                <div class="temp">Sky - ${day.weather[0].main} </div>
+            </div>`
         } else {
             otherDayForcast += `
             <div class="weather-forecast-item">
