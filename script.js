@@ -53,7 +53,7 @@ function showWeatherData(data) {
     currentWeatherItemsEl.innerHTML =
         `<div class="weather-item">
         <div>Tempature</div>
-        <div style="font-size:17px;">${(temp).toFixed(1)} &#176;C</div>
+        <div>${(temp).toFixed(1)} &#176;C</div>
     </div>
     <div class="weather-item">
         <div>Feels Like</div>
@@ -66,7 +66,7 @@ function showWeatherData(data) {
     
     <div class="weather-item">
         <div>Wind Speed</div>
-        <div>${parseFloat(wind_speed).toFixed(1)*3.6} Km/h</div>
+       <div>${((wind_speed)*(3.6)).toFixed(1)} km/h</div>
     </div>
     <div class="weather-item">
         <div>Sunrise</div>
