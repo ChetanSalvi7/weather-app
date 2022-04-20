@@ -1,5 +1,3 @@
-// Declaring the variables
-
 const timeEl = document.getElementById('time');
 const dateEl = document.getElementById('date');
 const currentWeatherItemsEl = document.getElementById('current-weather-items');
@@ -11,7 +9,6 @@ const currentTempEl = document.getElementById('current-temp');
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-//API Key
 const API_KEY = "55363c060cbfefcb3c8aa054fb09be59"
 
 setInterval(() => {
@@ -30,14 +27,12 @@ setInterval(() => {
 }, 1000);
 
 
+//get information from Api 
 getWeatherData();
 function getWeatherData() {
     navigator.geolocation.getCurrentPosition((success) => {
-        console.log(success)
 
         let { latitude, longitude } = success.coords;
-        
-        //calling api 
 
         fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`).then(res => res.json()).then(data => {
 
@@ -48,11 +43,13 @@ function getWeatherData() {
     })
 }
 
+
+// get weather information 
 function showWeatherData(data) {
     let { humidity, sunrise, sunset, wind_speed, feels_like, temp } = data.current;
 
     timezone.innerHTML = data.timezone;
-    countryEl.innerHTML = data.lat + ' , ' + data.lon
+    
 
 
 
@@ -72,7 +69,7 @@ function showWeatherData(data) {
     
     <div class="weather-item">
         <div>Wind Speed</div>
-       <div>${((wind_speed)*(3.6)).toFixed(1)} km/h</div>
+        <div>${((wind_speed)*(3.6)).toFixed(1)} km/h</div>
     </div>
     <div class="weather-item">
         <div>Sunrise</div>
@@ -102,10 +99,33 @@ function showWeatherData(data) {
                 <div class="temp">Day - ${day.temp.day} &#176;C</div>
                 <div class="temp">Night - ${day.temp.night} &#176;C</div>
                 
+                
+                
             </div>
             
             `
         }
     })
     weatherForecastEl.innerHTML = otherDayForcast;
+}
+
+
+//get location Information form diffrent url 
+getlocationname();
+function getlocationname(){
+    navigator.geolocation.getCurrentPosition((success) => {
+
+        let { latitude, longitude } = success.coords;
+
+        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`).then(res => res.json()).then(data => {
+
+            console.log(data)
+            showlocation(data);
+        })
+
+    })
+}
+
+function showlocation(data) {
+    countryEl.innerHTML = data.name + ' , ' + data.sys.country 
 }
