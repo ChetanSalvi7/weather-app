@@ -33,6 +33,7 @@ setInterval(() => {
 getWeatherData();
 function getWeatherData() {
     navigator.geolocation.getCurrentPosition((success) => {
+        console.log(success)
 
         let { latitude, longitude } = success.coords;
         
@@ -51,7 +52,7 @@ function showWeatherData(data) {
     let { humidity, sunrise, sunset, wind_speed, feels_like, temp } = data.current;
 
     timezone.innerHTML = data.timezone;
-    countryEl.innerHTML = data.name + ' , ' + data.sys.country;
+    countryEl.innerHTML = data.lat + ' , ' + data.lon
 
 
 
