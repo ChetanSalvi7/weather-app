@@ -51,7 +51,7 @@ function showWeatherData(data) {
     let { humidity, sunrise, sunset, wind_speed, feels_like, temp } = data.current;
 
     timezone.innerHTML = data.timezone;
-    countryEl.innerHTML = data.name + ' , ' + data.country;
+    countryEl.innerHTML = data.name + ' , ' + data.sys.country;
 
 
 
